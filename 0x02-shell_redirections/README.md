@@ -1,4 +1,5 @@
 Tasks:
+# Mandatory:
 
 0. Hello World
 Write a script that prints “Hello, World”, followed by a new line to the standard output.
@@ -55,6 +56,7 @@ Write a script that reverse its input.
 Write a script that displays all users and their home directories, sorted by users. Based on the the /etc/passwd file
 
 #Advanced:
+
 23. Empty casks make the most noise
 Write a command that finds all empty files and directories in the current directory and all sub-directories.
   > Only the names of the files and directories should be displayed (not the entire path)
