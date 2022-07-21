@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 # Prints string via until
 i=0
-until [ $((i++)) -gt 10 ]; do
-	echo Best School
+until [ $x -eq 10 ]
+do
+  echo "Best School"
+  (( x++ ))
 done
