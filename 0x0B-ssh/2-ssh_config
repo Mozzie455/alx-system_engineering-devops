@@ -1,0 +1,4 @@
+Host *
+     HostName 3.235.148.57
+     User root
+     IdentityFile ~/.ssh/school
