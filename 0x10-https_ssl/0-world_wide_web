@@ -1,23 +1,18 @@
 #!/usr/bin/env bash
 # Dsplays info about domain and subdomain.
 
-records ()
-{
-record="$(dig ${2}.${1} | awk 'NR==14 { print $4 }')"
-
-IP="$(dig ${2}.${1} | awk 'NR==14 { print $5 }')"
-
-echo "The subdomain $2 is a $record record and points to $IP"
+func () {
+    dig_info=$(dig "$2"."$1" | grep -A1 'ANSWER SECTION:' | awk '{print $1" "$4" "$5}' | cut -d ";" -f 3)
+    record=$(echo $dig_info | cut -d " " -f 2)
+    ip=$(echo $dig_info | cut -d " " -f 3)
+    echo "The subdomain $2 is a $record record and points to $ip"
 }
 
-
-# Check number of arguments passed to script
-if [ "$#" -ne 2 ];
-then
-    records $1 "www"
-    records $1 "lb-01"
-    records $1 "web-01"
-    records $1 "web-02"
-else
-    records $1 $2
+if [ $# -eq 1 ]; then
+    func "$1" "www"
+    func "$1" "lb-01"
+    func "$1" "web-01"
+    func "$1" "web-02"
+elif [ $# -eq 2 ]; then
+    func "$1" "$2"
 fi
