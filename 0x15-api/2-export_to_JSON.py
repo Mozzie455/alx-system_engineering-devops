@@ -7,19 +7,15 @@ from sys import argv
 
 if __name__ == "__main__":
 
-    users = requests.get(
-        "https://jsonplaceholder.typicode.com/users?id=" + argv[1])
-    todos = requests.get(
-        "https://jsonplaceholder.typicode.com/todos?userId=" + argv[1])
+    user_id = sys.argv[1]
+    url = "https://jsonplaceholder.typicode.com/"
+    user = requests.get(url + "users/{}".format(user_id)).json()
+    username = user.get("username")
+    todos = requests.get(url + "todos", params={"userId": user_id}).json()
 
-    users_json = users.json()
-    todos_json = todos.json()
-    data_list = {str(argv[1]): [], }
-    employee_name = users_json[0]['username']
-
-    with open(str(argv[1])+'.json', 'w') as f:
-        for data in todos_json:
-            data_list[str(argv[1])].append({"username": str(employee_name),
-                                            "completed": data['completed'],
-                                            "task": data['title']})
-        write = json.dump(data_list, f)
+    with open("{}.json".format(user_id), "w") as jsonfile:
+        json.dump({user_id: [{
+            "task": t.get("title"),
+            "completed": t.get("completed"),
+            "username": username
+        } for t in todos]}, jsonfile)
