@@ -1,8 +1,8 @@
 #!/usr/bin/python3
 """Get info form Api and Save CSV"""
 import csv
+import sys
 import requests
-from sys import argv
 
 
 if __name__ == "__main__":

@@ -1,8 +1,8 @@
 #!/usr/bin/python3
 """Fetch data from an API"""
 import json
+import sys
 import requests
-from sys import argv
 
 
 if __name__ == "__main__":
